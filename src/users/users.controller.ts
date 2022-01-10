@@ -51,7 +51,7 @@ export class UsersController {
       userLoginDTO.email,
       userLoginDTO.password,
     )
-    response.cookie('jwt', jwt, { httpOnly: true })
+    response.cookie('jwt', jwt, { httpOnly: true }).status(200)
     return user
   }
 

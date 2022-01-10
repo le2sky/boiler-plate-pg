@@ -52,7 +52,7 @@ class Application {
       SwaggerModule.createDocument(
         this.server,
         new DocumentBuilder()
-          .setTitle('Yoon Sang Seok - API')
+          .setTitle('boilerplate')
           .setDescription('TypeORM In Nest')
           .setVersion('0.0.1')
           .build(),
@@ -74,7 +74,7 @@ class Application {
       }),
     )
     this.server.use(passport.initialize())
-    this.server.use(passport.session())
+    //this.server.use(passport.session())
     this.server.useGlobalInterceptors(
       new ClassSerializerInterceptor(this.server.get(Reflector)),
     )

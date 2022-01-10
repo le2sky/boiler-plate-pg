@@ -3,9 +3,10 @@ import { INestApplication } from '@nestjs/common'
 import * as request from 'supertest'
 import { AppModule } from './../src/app.module'
 
-describe('AppController (e2e)', () => {
+describe('App 컨트롤러(e2e)', () => {
   let app: INestApplication
 
+  //testing을 실행하기 전 가장 먼저 실행되는 함수
   beforeEach(async () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
@@ -22,13 +23,7 @@ describe('AppController (e2e)', () => {
       .expect('typeorm in nest, just coding')
   })
 
-  describe('hello jest', () => {
-    it('two plus two is four', () => {
-      expect(2 + 2).toBe(4)
-    })
-  })
-
-  describe('/users', () => {
+  describe('Users 컨트롤러(e2e)', () => {
     it('/users (GET)', async () => {
       const res = await request(app.getHttpServer()).get('/users')
       expect(res.statusCode).toBe(401)
@@ -36,28 +31,19 @@ describe('AppController (e2e)', () => {
 
     it('/users (POST)', async () => {
       const res = await request(app.getHttpServer()).post('/users').send({
-        email: 'test@amamov.com',
-        password: '1205',
+        email: 'test1234@naver.com',
+        password: 'test1234',
         username: 'test',
       })
-
-      expect(res.statusCode).toBe(401)
-      // expect(res.body).toBe({
-      //   email: 'test@amamov.com',
-      //   username: 'test',
-      //   id: '419cea5a-8826-41f3-bba0-69d9e4d09eaa',
-      //   createdAt: '2021-11-11T07:34:28.617Z',
-      //   updatedAt: '2021-11-11T07:34:28.617Z',
-      // })
+      expect(res.statusCode).toBe(201)
     })
-  })
 
-  it('/users/login (POST)', async () => {
-    const res = await request(app.getHttpServer()).post('/users/login').send({
-      email: 'test@amamov.com',
-      password: '1205',
+    it('/users/login (POST)', async () => {
+      const res = await request(app.getHttpServer()).post('/users/login').send({
+        email: 'test1234@naver.com',
+        password: 'test1234',
+      })
+      expect(res.statusCode).toBe(200)
     })
-    expect(res.statusCode).toBe(200) // 201
-    console.log(res.headers)
   })
 })
